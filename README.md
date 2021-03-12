@@ -144,6 +144,10 @@ struct QuestionViewModel {
 ## 8. Readig data from Firebase Cloud Firestore using the `Combine` framework
 
 ```swift 
+import Combine 
+import Firebase
+import FirebaseFirestoreSwift
+
 class QuestionViewModel {
   private let db = Firebase.Firestore.firestore()
   private let questionsCollection = "questions"
