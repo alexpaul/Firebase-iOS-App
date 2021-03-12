@@ -141,7 +141,7 @@ struct QuestionViewModel {
 
 ![successful post](https://user-images.githubusercontent.com/1819208/110941050-bafab600-8305-11eb-8afd-7ddd839ea8e7.png)
 
-## 8. Readig data from Firebase Cloud Firestore 
+## 8. Readig data from Firebase Cloud Firestore using the `Combine` framework
 
 ```swift 
 class QuestionViewModel {
