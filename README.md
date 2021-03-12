@@ -48,3 +48,37 @@ Heere is the [Firebase](https://github.com/firebase/firebase-ios-sdk/blob/master
 Head over to Xcode and install the Swift package. 
 
 ![install firebase swift package](https://user-images.githubusercontent.com/1819208/110936108-5f78fa00-82fe-11eb-8706-c927114379a6.png)
+
+![install package](https://user-images.githubusercontent.com/1819208/110936412-d8785180-82fe-11eb-8c9a-0342fac45b8c.png)
+
+#### Select the Firebase products you need in your app
+
+![firebase product selection](https://user-images.githubusercontent.com/1819208/110936621-2db46300-82ff-11eb-8961-460883988bd6.png)
+
+## 5. Initialize Firebase in your Xcode project 
+
+After intalling Firebase to your project via Swift Package manager or Cocoapods you now need to initialize Firebase in your Xcode project. 
+
+Add the following code to your `AppDelegate.swift`
+
+```swift 
+import UIKit
+import Firebase // code added 
+
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate {
+  
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    // Override point for customization after application launch.
+
+    // initialize Firebase
+    FirebaseApp.configure() // code added
+
+    return true
+  }
+}
+```
+
+You now have in place the basic requirements for communicating between your Xcode application and Firebase. 
+
+
