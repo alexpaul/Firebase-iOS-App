@@ -81,4 +81,65 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 You now have in place the basic requirements for communicating between your Xcode application and Firebase. 
 
+## 6. Setup Cloud Firestore 
+
+Head over to the Firebase console and enable Cloud Firestore located under the **Build** panel on the left of the console. 
+
+* Click on Cloud Firestore. 
+* Click on Create database.
+
+For now select **test mode** to enable writing and reading to the database without security rules in place. We will reviist security rules a bit later. 
+
+![create database](https://user-images.githubusercontent.com/1819208/110940177-7e7a8a80-8304-11eb-96df-0af2ea79dbd1.png)
+
+
+## 7. Posting data to Firebase database
+
+Firebase Cloud Firestore is made up of collections at its top level. Collection consists of documents. Each document itself can have a collection and so on. 
+
+![empty database](https://user-images.githubusercontent.com/1819208/110940476-f8127880-8304-11eb-811b-3525fddcb203.png)
+
+When posting data from your Xcode project to Firebase Cloud Firestore, this data can be posted in two ways: 
+
+* The data can be sent via a key, value pair. 
+* The data can be sent by making your object conform to `Codbale` and using the `FirebaseFirestoreSwift` package. 
+
+In this project we will be doing the latter. 
+
+#### Question.swift 
+
+```swift 
+struct Question: Codable {
+  var question: String
+  var answer: String
+  var id = UUID().uuidString
+}
+```
+
+#### QuestionViewModel.swift 
+
+```swift 
+import Foundation
+import Firebase
+import FirebaseFirestoreSwift
+
+struct QuestionViewModel {
+  
+  func postQuestion(question: Question) {
+    // handle to the database
+    let db = Firestore.firestore()
+    
+    do {
+      try db.collection("questions").document(question.id).setData(from: question)
+    } catch {
+      print("Error writing to the Firestore: \(error)")
+    }
+  }
+  
+}
+```
+
+![successful post](https://user-images.githubusercontent.com/1819208/110941050-bafab600-8305-11eb-8afd-7ddd839ea8e7.png)
+
+
 
