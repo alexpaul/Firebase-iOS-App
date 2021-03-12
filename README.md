@@ -124,22 +124,47 @@ import Firebase
 import FirebaseFirestoreSwift
 
 struct QuestionViewModel {
+  private let db = Firebase.Firestore.firestore()
+  private let questionsCollection = "questions"
   
-  func postQuestion(question: Question) {
-    // handle to the database
-    let db = Firestore.firestore()
-    
+  func postQuestion(question: Question) throws {
     do {
-      try db.collection("questions").document(question.id).setData(from: question)
+      try db.collection(questionsCollection)
+        .document(question.id)
+        .setData(from: question)
     } catch {
-      print("Error writing to the Firestore: \(error)")
+      throw QuestionsError.postingError(error)
     }
   }
-  
 }
 ```
 
 ![successful post](https://user-images.githubusercontent.com/1819208/110941050-bafab600-8305-11eb-8afd-7ddd839ea8e7.png)
 
+## 8. Readig data from Firebase Cloud Firestore 
 
+```swift 
+class QuestionViewModel {
+  private let db = Firebase.Firestore.firestore()
+  private let questionsCollection = "questions"
+  
+  func fetchQuestions() -> Future<[Question], QuestionsError>  {
+    return Future { promise in
+      self.db.collection(self.questionsCollection).getDocuments { (snapshot, error) in
+        if let error = error {
+          promise(.failure(.fetchingError(error)))
+        }
+        if let snapshot = snapshot {
+          do {
+            let questions = try snapshot.documents.compactMap { try $0.data(as: Question.self) }
+            promise(.success(questions))
+          } catch {
+            promise(.failure(.snapshotError(error)))
+          }
+        }
+      }
+    }
+  }
+}
+```
 
