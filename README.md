@@ -43,7 +43,7 @@ Download the `GoogleService-info.plist` and add it to your Xcode project.
 
 As of this writing Firebase supports Swift Package Manager and also Cocoapods. In this project we will be installing Firebase via SPM.
 
-Heere is the [Firebase](https://github.com/firebase/firebase-ios-sdk/blob/master/SwiftPackageManager.md) SPM package url `https://github.com/firebase/firebase-ios-sdk.git`
+Here is the [Firebase](https://github.com/firebase/firebase-ios-sdk/blob/master/SwiftPackageManager.md) SPM package url `https://github.com/firebase/firebase-ios-sdk.git`
 
 Head over to Xcode and install the Swift package. 
 
